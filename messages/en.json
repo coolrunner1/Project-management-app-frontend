@@ -1,5 +1,6 @@
 {
   "app-title": "Project management",
+  "home": "Home",
   "Auth": {
     "username": "Username",
     "username-or-email": "Username or email",
@@ -8,6 +9,8 @@
     "no-account": "Don't have an account yet?",
     "have-account": "Already have an account?",
     "register-now": " Sign Up now!",
-    "sign-in": "Sign in"
+    "login-now": " Sign In now!",
+    "sign-in": "Sign in",
+    "sign-up": "Sign up"
   }
 }
