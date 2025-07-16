@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "ТЕТТСТСТСТТСТС!",
-    "about": "Go to the abававпваout page"
+  "app-title": "Управление проектами",
+  "Auth": {
+    "username": "Имя пользователя",
+    "username-or-email": "Логин или email",
+    "password": "Пароль",
+    "confirm-password": "Подтверждение пароля",
+    "no-account": "Вы ещё не зарегистрированы?",
+    "have-account": "У вас уже есть аккаунт?",
+    "register-now": " Зарегистрируйтесь сейчас!",
+    "sign-in": "Войти"
   }
 }

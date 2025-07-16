@@ -1,6 +1,13 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "app-title": "Project management",
+  "Auth": {
+    "username": "Username",
+    "username-or-email": "Username or email",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "no-account": "Don't have an account yet?",
+    "have-account": "Already have an account?",
+    "register-now": " Sign Up now!",
+    "sign-in": "Sign in"
   }
 }
