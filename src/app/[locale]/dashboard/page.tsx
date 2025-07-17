@@ -10,7 +10,7 @@ import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal"
 import {ProjectErrors} from "@/types/errors";
 import {validator} from "@/utils/validator";
 import {ProjectSchema} from "@/schemas/project";
-import {NavBar} from "@/components/Dashboard/NavBar";
+import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
 import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 
 export default function DashboardPage() {
@@ -74,7 +74,7 @@ export default function DashboardPage() {
                 />
             )}
             <NavBar/>
-            <div>
+            <div className="min-h-[90vh]">
                 <div className='text-center'>
                     <h6 className='text-blueGray-700 text-xl md:text-2xl font-bold'>{t('Project.projects')}</h6>
                 </div>
@@ -92,7 +92,7 @@ export default function DashboardPage() {
                                         customStyles={"max-w-48"}
                                         onClick={() => {setShowNewProjectModal(true)}}
                                     />
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-2 max-w-6xl">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-4 max-w-6xl">
                                         {data.map(item => (
                                             <ProjectEntry key={item.id} item={item}/>
                                         ))}
@@ -100,7 +100,7 @@ export default function DashboardPage() {
                                 </>
                             }
                             {!data?.length &&
-                                <div className="text-center text-xl">{t('Project.no-projects')}</div>
+                                <div className="text-center text-xl">{t('Project.ёno-projects')}</div>
                             }
                         </>
                     }

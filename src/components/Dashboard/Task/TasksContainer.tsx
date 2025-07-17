@@ -9,7 +9,7 @@ export type TasksContainerProps = {
 export const TasksContainer = (props: TasksContainerProps) => {
     return (
         <div className='flex flex-col gap-3 p-4 rounded-2xl bg-container max-w-xl'>
-            <h2 className="text-xl text-center">{props.title}</h2>
+            <h2 className="text-lg text-center font-bold">{props.title}</h2>
             {props.tasks.map((task: Task) => <TasksEntry key={task.id} task={task}/>)}
         </div>
     );

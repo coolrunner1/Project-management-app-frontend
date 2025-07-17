@@ -31,7 +31,10 @@ export default function LoginPage() {
         onError: (error: AxiosError) => {
             console.error('Login error:', error);
             if (error.status === 422) {
-                setErrors({serverError: "Errors.invalid-login-password"});
+                setErrors({
+                    login: "Errors.invalid-login-password",
+                    password: "Errors.invalid-login-password"
+                });
                 return;
             }
             setErrors({serverError: "Errors.server-error"});

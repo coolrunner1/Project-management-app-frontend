@@ -8,6 +8,7 @@
   "close": "Close",
   "edit": "Edit",
   "delete": "Delete",
+  "profile": "Profile",
   "Auth": {
     "username": "Username",
     "username-or-email": "Username or email",
@@ -18,7 +19,8 @@
     "register-now": " Sign Up now!",
     "login-now": " Sign In now!",
     "sign-in": "Sign in",
-    "sign-up": "Sign up"
+    "sign-up": "Sign up",
+    "sign-out": "Sign out"
   },
   "Project": {
     "projects": "Projects",

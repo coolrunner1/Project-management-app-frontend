@@ -1,6 +1,6 @@
 "use client"
 import {signOut} from "@/utils/tempAuth";
-import {NavBar} from "@/components/Dashboard/NavBar";
+import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
 import {useQuery} from "@tanstack/react-query";
 import {getProject} from "@/api/projects";
 import {useParams} from "next/navigation";
@@ -67,7 +67,7 @@ export default function ProjectPage() {
     return (
         <>
             <NavBar />
-            <div className="min-h-screen">
+            <div className="min-h-[90vh]">
                 {isLoading && <LoadingIndicator/>}
                 {error && (
                     <div className='text-center text-xl'>{t(error.message)}</div>
