@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <div
             className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
-            <div>Will be replaced with landing page</div>
+            <div>Will be replaced with a landing page</div>
             <Link href="/login">Login</Link>
         </div>
     );

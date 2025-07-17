@@ -12,5 +12,13 @@
     "login-now": " Sign In now!",
     "sign-in": "Sign in",
     "sign-up": "Sign up"
+  },
+  "Errors": {
+    "too-short-3": "Minimum length is 3 symbols",
+    "too-short-8": "Minimum length is 8 symbols",
+    "invalid-login-password": "Invalid login or password were provided",
+    "invalid-email": "Invalid email provided",
+    "passwords-no-match": "Passwords don't match",
+    "has already been taken": "Has already been taken"
   }
 }
