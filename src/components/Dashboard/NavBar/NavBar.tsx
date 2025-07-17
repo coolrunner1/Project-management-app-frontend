@@ -1,7 +1,7 @@
 import {useTranslations} from "next-intl";
-import {signOut} from "@/utils/tempAuth";
 import Link from "next/link";
 import {NavBarButton} from "@/components/Dashboard/NavBar/NavBarButton";
+import {LanguageSwitcher} from "@/components/Global/LanguageSwitcher";
 
 export const NavBar = () => {
     const t = useTranslations()
@@ -9,16 +9,18 @@ export const NavBar = () => {
         <>
             <header className="flex justify-evenly fixed bg-container px-5 pt-2 w-screen max-w-full">
                 <Link href="/dashboard">
-                    <NavBarButton title={t("home")}/>
+                    <NavBarButton>
+                        {t("home")}
+                    </NavBarButton>
                 </Link>
                 <Link href="/profile">
-                    <NavBarButton title={t("profile")}/>
+                    <NavBarButton>
+                        {t("profile")}
+                    </NavBarButton>
                 </Link>
-                <button
-                    onClick={signOut}
-                >
-                    <NavBarButton title={t("Auth.sign-out")}/>
-                </button>
+                <NavBarButton>
+                    <LanguageSwitcher/>
+                </NavBarButton>
             </header>
             <div className="p-9"></div>
         </>

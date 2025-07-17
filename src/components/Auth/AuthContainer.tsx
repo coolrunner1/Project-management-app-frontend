@@ -2,6 +2,7 @@ import {ReactNode} from "react";
 import {BlurryButton} from "@/components/Global/RegularButtons/BlurryButton";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
+import {LanguageSwitcher} from "@/components/Global/LanguageSwitcher";
 
 export type AuthContainerProps = {
     children: ReactNode;
@@ -18,6 +19,11 @@ export const AuthContainer = (props: AuthContainerProps) => {
                         title={t('home')}
                     />
                 </Link>
+            </div>
+            <div
+                className="absolute z-40 top-0 right-0 m-2 sm:m-5 p-2 rounded-lg shadow backdrop-blur-xl bg-[#0000001f] hover:bg-[#0000003f] transition duration-200"
+            >
+                <LanguageSwitcher/>
             </div>
             <div className='absolute z-99 top-0 right-0 m-2 sm:m-5'>
                 {/*<Link href="#" locale={"ru"}>

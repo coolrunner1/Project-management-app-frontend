@@ -14,7 +14,7 @@ export const config = {
 export default function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const token = request.cookies.get("_token")
-    if (pathname.includes('/dashboard')) {
+    if (pathname.includes('/dashboard') || pathname.includes('/profile')) {
         if (!token) {
             return Response.redirect(new URL('/login', request.url));
         }
