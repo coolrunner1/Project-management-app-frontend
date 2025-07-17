@@ -3,14 +3,14 @@ import {AuthContainer} from "@/components/Auth/AuthContainer";
 import {BlurryInput} from "@/components/Global/BlurryInput";
 import {useTranslations} from "next-intl";
 import Link from "next/link";
-import {KeyboardEvent, useEffect, useState} from "react";
+import {KeyboardEvent, useState} from "react";
 import {BlueButton} from "@/components/Global/BlueButton";
 import {login} from "@/api/auth";
 import {LoginSchema} from "@/schemas/auth";
 import {validator} from "@/utils/validator";
 import {InputError} from "@/components/Global/InputError";
 import {useMutation} from "@tanstack/react-query";
-import {isAuthenticated, signIn} from "@/utils/tempAuth";
+import {signIn} from "@/utils/tempAuth";
 import {AxiosError} from "axios";
 import {ErrorModal} from "@/components/Global/ErrorModal";
 import {useRouter} from "next/navigation";
@@ -29,16 +29,6 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
 
     const [errors, setErrors] = useState<LoginErrors | null>(null);
-
-    //temporary measure
-    const loggedIn = isAuthenticated()
-
-    //temporary measure; will be replaced with a custom hook
-    useEffect(() => {
-        if (loggedIn) {
-            router.replace('/dashboard');
-        }
-    }, [loggedIn]);
 
     const mutation = useMutation({
         mutationFn: login,

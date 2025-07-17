@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {signOut} from "@/utils/tempAuth";
+import {getToken, signOut} from "@/utils/tempAuth";
 
 const axiosClient = axios.create({
     baseURL: `http://localhost:4000/api/v1`,
@@ -46,7 +46,7 @@ axiosClient.interceptors.response.use(
 
 axiosClient.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token");
+        const token = getToken();
         if (token) {
             config.headers.Authorization = token;
         }

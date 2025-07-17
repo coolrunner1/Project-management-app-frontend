@@ -11,7 +11,7 @@ export const ErrorModal = (props: ErrorModalProps) => {
 
     return (
         <div className="flex justify-center items-center absolute z-50 w-screen h-screen backdrop-blur-2xl">
-            <div className="flex flex-col gap-4 bg-blue-500 rounded-2xl items-center justify-center h-full w-full max-w-xl max-h-96 p-10">
+            <div className="flex flex-col gap-4 bg-blue-500 rounded-2xl items-center justify-center h-full w-full max-w-96 max-h-56 p-10">
                 <span className="text-xl font-bold">{t(props.error)}</span>
                 <BlueButton
                     label={"OK"}

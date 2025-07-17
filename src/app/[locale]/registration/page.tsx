@@ -3,12 +3,12 @@ import {AuthContainer} from "@/components/Auth/AuthContainer";
 import {BlurryInput} from "@/components/Global/BlurryInput";
 import {useTranslations} from "next-intl";
 import Link from "next/link";
-import {KeyboardEvent, useEffect, useState} from "react";
+import {KeyboardEvent, useState} from "react";
 import {BlueButton} from "@/components/Global/BlueButton";
 import {RegistrationSchema} from "@/schemas/auth";
 import {register} from "@/api/auth";
 import {InputError} from "@/components/Global/InputError";
-import {isAuthenticated, signIn} from "@/utils/tempAuth";
+import {signIn} from "@/utils/tempAuth";
 import {useRouter} from "next/navigation";
 import {validator} from "@/utils/validator";
 import {useMutation} from "@tanstack/react-query";
@@ -38,16 +38,6 @@ export default function RegistrationPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const [errors, setErrors] = useState<RegistrationErrors | null>(null);
-
-    //temporary measure
-    const loggedIn = isAuthenticated()
-
-    //temporary measure; will be replaced with a custom hook
-    useEffect(() => {
-        if (loggedIn) {
-            router.replace('/dashboard');
-        }
-    }, [loggedIn]);
 
     const mutation = useMutation({
         mutationFn: register,

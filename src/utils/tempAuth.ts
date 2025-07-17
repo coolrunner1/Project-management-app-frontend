@@ -1,27 +1,27 @@
 //This solution is temporary and will be replaced in future commits with custom AuthContext
 import {User} from "@/types/user";
+import Cookies from 'js-cookie'
 
 export const signIn = (user: User, token: string) => {
-    if (typeof window === "undefined") return;
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    Cookies.set('_token', token);
+    Cookies.set('_user', JSON.stringify(user));
     window.location.href = "/dashboard";
 }
 
 export const signOut = () => {
-    if (typeof window === "undefined") return;
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    Cookies.remove('_token');
+    Cookies.remove('_user');
     window.location.href = "/login";
+}
 
+export const getToken = () => {
+    return Cookies.get("_token");
 }
 
 export const isAuthenticated = () => {
-    if (typeof window === "undefined") return false;
-    return !!localStorage.getItem("user");
+    return !!Cookies.get("_user");
 }
 
 export const getAuthUser = () => {
-    if (typeof window === "undefined") return null;
-    return (JSON.parse(localStorage.getItem("user") || "") as User);
+    return (JSON.parse(Cookies.get("_user") || "") as User);
 }

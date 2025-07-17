@@ -1,10 +1,12 @@
 import axiosClient from "@/api/axiosClient";
 import {authResponse} from "@/types/authResponse";
 
-export const login = (body: any): Promise<authResponse> => {
-    return axiosClient.post('/auth/login', body);
+export const login = async (body: any): Promise<authResponse> => {
+    const res = await axiosClient.post('/auth/login', body);
+    return res.data;
 }
 
-export const register = (body: any): Promise<authResponse> => {
-    return axiosClient.post('/auth/register', body);
+export const register = async (body: any): Promise<authResponse> => {
+    const res = await axiosClient.post('/auth/register', body);
+    return res.data;
 }
