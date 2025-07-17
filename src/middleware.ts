@@ -18,7 +18,7 @@ export default function middleware(request: NextRequest) {
         if (!token) {
             return Response.redirect(new URL('/login', request.url));
         }
-    } else if (pathname.includes('/login') ||  pathname.includes('/register')) {
+    } else if (pathname.includes('/login') || pathname.includes('/register') || pathname === "/en" || pathname === "/ru") {
         if (token) {
             return Response.redirect(new URL('/dashboard', request.url));
         }

@@ -10,6 +10,12 @@
   "delete": "Удалить",
   "profile": "Профиль",
   "change-language": "Сменить язык",
+  "Landing": {
+    "manage-projects": "Управляйте Проектами",
+    "beautifully": "Со Стилем",
+    "description": "Универсальная платформа управления проектами.",
+    "get-started": "Войти"
+  },
   "Auth": {
     "username": "Имя пользователя",
     "username-or-email": "Логин или email",

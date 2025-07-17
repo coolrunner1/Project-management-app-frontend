@@ -10,6 +10,12 @@
   "delete": "Delete",
   "profile": "Profile",
   "change-language": "Change language",
+  "Landing": {
+    "manage-projects": "Manage Projects",
+    "beautifully": "Beautifully",
+    "description": "Your all-in-one project management platform.",
+    "get-started": "Get started"
+  },
   "Auth": {
     "username": "Username",
     "username-or-email": "Username or email",
