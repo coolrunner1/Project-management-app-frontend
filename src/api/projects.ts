@@ -6,7 +6,9 @@ export const getProjects = async (): Promise<Project[]> => {
     return res.data;
 }
 
-export const getProject = async (id: string): Promise<Project> => {
+export const getProject = async ({queryKey}: any): Promise<Project> => {
+    const [_key, id] = queryKey;
+
     const res = await axiosClient.get('/projects/' + id);
     return res.data;
 }

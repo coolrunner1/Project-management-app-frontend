@@ -6,6 +6,8 @@
   "create": "Create",
   "save": "Save",
   "close": "Close",
+  "edit": "Edit",
+  "delete": "Delete",
   "Auth": {
     "username": "Username",
     "username-or-email": "Username or email",
@@ -20,6 +22,8 @@
   },
   "Project": {
     "projects": "Projects",
+    "add-new-task": "Add a new task",
+    "no-projects": "No projects yet",
     "title": "Project title",
     "description": "Project description"
   },
@@ -30,5 +34,12 @@
     "invalid-email": "Invalid email provided",
     "passwords-no-match": "Passwords don't match",
     "has already been taken": "Has already been taken"
+  },
+  "Tasks": {
+    "to-do-tasks": "Tasks to be done",
+    "in-progress-tasks": "Tasks in progress",
+    "in-testing-tasks": "Tasks in testing",
+    "rejected-tasks": "Rejected tasks",
+    "done-tasks": "Finished tasks"
   }
 }

@@ -5,11 +5,13 @@ import {LoadingIndicator} from "@/components/Global/LoadingIndicator";
 import {useTranslations} from "next-intl";
 import {SmallBlueButton} from "@/components/Global/SmallButtons/SmallBlueButton";
 import {useState} from "react";
-import {ProjectEntry} from "@/components/Project/ProjectEntry";
-import {EditProjectModal} from "@/components/Project/EditProjectModal";
+import {ProjectEntry} from "@/components/Dashboard/Project/ProjectEntry";
+import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal";
 import {ProjectErrors} from "@/types/errors";
 import {validator} from "@/utils/validator";
 import {ProjectSchema} from "@/schemas/project";
+import {NavBar} from "@/components/Dashboard/NavBar";
+import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 
 export default function DashboardPage() {
     const t = useTranslations();
@@ -71,9 +73,10 @@ export default function DashboardPage() {
                     errors={errors}
                 />
             )}
+            <NavBar/>
             <div>
                 <div className='text-center'>
-                    <h6 className='text-blueGray-700 text-xl font-bold'>{t('Project.projects')}</h6>
+                    <h6 className='text-blueGray-700 text-xl md:text-2xl font-bold'>{t('Project.projects')}</h6>
                 </div>
                 <div className='flex flex-col items-center justify-center px-4 py-4 overflow-auto'>
                     {isLoading && <LoadingIndicator/>}
@@ -84,9 +87,12 @@ export default function DashboardPage() {
                         <>
                             {data &&
                                 <>
-                                    <SmallBlueButton label={t('create')} onClick={() => {setShowNewProjectModal(true)}}/>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-2">
-
+                                    <BlueButton
+                                        label={t('create')}
+                                        customStyles={"max-w-48"}
+                                        onClick={() => {setShowNewProjectModal(true)}}
+                                    />
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mt-2 max-w-6xl">
                                         {data.map(item => (
                                             <ProjectEntry key={item.id} item={item}/>
                                         ))}
@@ -94,7 +100,7 @@ export default function DashboardPage() {
                                 </>
                             }
                             {!data?.length &&
-                                <div className="text-center text-xl">{t('no-projects')}</div>
+                                <div className="text-center text-xl">{t('Project.no-projects')}</div>
                             }
                         </>
                     }

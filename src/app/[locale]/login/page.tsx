@@ -54,7 +54,7 @@ export default function LoginPage() {
         setErrors(validationErrors);
         setTimeout(() => {
             setErrors(null);
-        }, 5000);
+        }, 10000);
     }
 
     const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {

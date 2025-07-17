@@ -23,7 +23,7 @@ export default function RegistrationPage() {
 
         setTimeout(() => {
             setErrors(null);
-        }, 5000)
+        }, 10000)
     }
 
     const [username, setUsername] = useState('');
