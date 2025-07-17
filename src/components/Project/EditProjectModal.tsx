@@ -4,11 +4,7 @@ import {ModalContainer} from "@/components/Global/Modal/ModalContainer";
 import {useTranslations} from "next-intl";
 import {ModalInput} from "@/components/Global/Inputs/ModalInput";
 import {InputError} from "@/components/Global/Inputs/InputError";
-
-export type ProjectErrors = {
-    title: string;
-    description: string;
-}
+import {ProjectErrors} from "@/types/errors";
 
 export type NewProjectModalProps = {
     title: string;
@@ -17,7 +13,7 @@ export type NewProjectModalProps = {
     setDescription: (description: string) => void;
     onClose: () => void;
     onSave: () => void;
-    errors?: ProjectErrors;
+    errors?: ProjectErrors | null;
 }
 
 export const EditProjectModal = (props: NewProjectModalProps) => {

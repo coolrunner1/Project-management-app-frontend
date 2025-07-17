@@ -19,6 +19,7 @@
     "sign-up": "Sign up"
   },
   "Project": {
+    "projects": "Projects",
     "title": "Project title",
     "description": "Project description"
   },

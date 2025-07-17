@@ -10,7 +10,7 @@ export const InputError = (props: InputErrorProps) => {
     return (
         <>
             {props.error ?
-                <div className="text-red-400 mb-2">{t(props.error)}</div>
+                <div className="text-red-500 mb-2">{t(props.error)}</div>
                 : <div className="py-3"></div>
             }
         </>

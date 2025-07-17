@@ -22,6 +22,6 @@ export const isAuthenticated = () => {
     return !!Cookies.get("_user");
 }
 
-export const getAuthUser = () => {
+export const getUser = () => {
     return (JSON.parse(Cookies.get("_user") || "") as User);
 }

@@ -9,23 +9,11 @@ import {RegistrationSchema} from "@/schemas/auth";
 import {register} from "@/api/auth";
 import {InputError} from "@/components/Global/Inputs/InputError";
 import {signIn} from "@/utils/tempAuth";
-import {useRouter} from "next/navigation";
 import {validator} from "@/utils/validator";
 import {useMutation} from "@tanstack/react-query";
 import {AxiosError} from "axios";
+import {RegistrationErrors, RegistrationResponseErrors} from "@/types/errors";
 
-type RegistrationErrors = {
-    username?: string,
-    email?: string,
-    password?: string,
-    confirmPassword?: string,
-    serverError?: string
-};
-
-type RegistrationResponseErrors = {
-    username?: string[],
-    email?: string[],
-};
 
 export default function RegistrationPage() {
     const t = useTranslations();

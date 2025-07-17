@@ -13,17 +13,10 @@ import {useMutation} from "@tanstack/react-query";
 import {signIn} from "@/utils/tempAuth";
 import {AxiosError} from "axios";
 import {ErrorModal} from "@/components/Global/Modal/ErrorModal";
-import {useRouter} from "next/navigation";
-
-type LoginErrors = {
-    login?: string,
-    password?: string,
-    serverError?: string
-};
+import {LoginErrors} from "@/types/errors";
 
 export default function LoginPage() {
     const t = useTranslations();
-    const router = useRouter();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

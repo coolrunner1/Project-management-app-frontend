@@ -1,18 +1,22 @@
 "use client"
-import {useQuery} from "@tanstack/react-query";
-import {getProjects} from "@/api/projects";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {createProject, getProjects} from "@/api/projects";
 import {LoadingIndicator} from "@/components/Global/LoadingIndicator";
 import {useTranslations} from "next-intl";
 import {SmallBlueButton} from "@/components/Global/SmallButtons/SmallBlueButton";
 import {useState} from "react";
 import {ProjectEntry} from "@/components/Project/ProjectEntry";
 import {EditProjectModal} from "@/components/Project/EditProjectModal";
+import {ProjectErrors} from "@/types/errors";
+import {validator} from "@/utils/validator";
+import {ProjectSchema} from "@/schemas/project";
 
 export default function DashboardPage() {
     const t = useTranslations();
 
-    const [newProjectTitle, setNewProjectTitle] = useState('')
+    const [newProjectTitle, setNewProjectTitle] = useState('');
     const [newProjectDescription, setNewProjectDescription] = useState('');
+    const [errors, setErrors] = useState<ProjectErrors | null>(null)
 
     const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
@@ -20,15 +24,38 @@ export default function DashboardPage() {
         data,
         isLoading,
         isError,
-        error
+        error,
+        refetch
     } = useQuery({
         queryFn: getProjects,
         queryKey: ['_projects']
     });
 
+    const mutation = useMutation({
+        mutationFn: createProject,
+        onSuccess: () => {
+            setShowNewProjectModal(false);
+            refetch();
+        },
+        onError: () => {
+            alert(t("Errors.server-error"))
+        }
+    });
+
     const handleSave = async () => {
-        alert("Placeholder");
-        setShowNewProjectModal(false);
+        const body = {
+            title: newProjectTitle,
+            description: newProjectDescription,
+        };
+
+        const validationErrors = validator(ProjectSchema, body);
+
+        if (validationErrors) {
+            setErrors(validationErrors as ProjectErrors);
+            return;
+        }
+
+        mutation.mutate(body);
     }
 
     return (
@@ -41,6 +68,7 @@ export default function DashboardPage() {
                     setDescription={setNewProjectDescription}
                     onSave={() => handleSave()}
                     onClose={() => setShowNewProjectModal(false)}
+                    errors={errors}
                 />
             )}
             <div>
