@@ -1,18 +1,18 @@
 "use client"
 import {AuthContainer} from "@/components/Auth/AuthContainer";
-import {BlurryInput} from "@/components/Global/BlurryInput";
+import {BlurryInput} from "@/components/Global/Inputs/BlurryInput";
 import {useTranslations} from "next-intl";
 import Link from "next/link";
 import {KeyboardEvent, useState} from "react";
-import {BlueButton} from "@/components/Global/BlueButton";
+import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 import {login} from "@/api/auth";
 import {LoginSchema} from "@/schemas/auth";
 import {validator} from "@/utils/validator";
-import {InputError} from "@/components/Global/InputError";
+import {InputError} from "@/components/Global/Inputs/InputError";
 import {useMutation} from "@tanstack/react-query";
 import {signIn} from "@/utils/tempAuth";
 import {AxiosError} from "axios";
-import {ErrorModal} from "@/components/Global/ErrorModal";
+import {ErrorModal} from "@/components/Global/Modal/ErrorModal";
 import {useRouter} from "next/navigation";
 
 type LoginErrors = {
@@ -59,6 +59,9 @@ export default function LoginPage() {
         }
 
         setErrors(validationErrors);
+        setTimeout(() => {
+            setErrors(null);
+        }, 5000);
     }
 
     const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -106,7 +109,7 @@ export default function LoginPage() {
                         <InputError error={errors?.password}/>
                         <BlueButton
                             label={t('Auth.sign-in')}
-                            handleClick={() => handleLogin()}
+                            onClick={() => handleLogin()}
                         />
                     </div>
                 </div>

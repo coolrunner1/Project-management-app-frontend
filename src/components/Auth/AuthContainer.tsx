@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {BlurryButton} from "@/components/Global/BlurryButton";
+import {BlurryButton} from "@/components/Global/RegularButtons/BlurryButton";
 import {useTranslations} from "next-intl";
 import {Link} from "@/i18n/navigation";
 

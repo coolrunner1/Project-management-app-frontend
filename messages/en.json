@@ -1,6 +1,11 @@
 {
   "app-title": "Project management",
   "home": "Home",
+  "created_at": "Created at",
+  "updated_at": "Updated at",
+  "create": "Create",
+  "save": "Save",
+  "close": "Close",
   "Auth": {
     "username": "Username",
     "username-or-email": "Username or email",
@@ -12,6 +17,10 @@
     "login-now": " Sign In now!",
     "sign-in": "Sign in",
     "sign-up": "Sign up"
+  },
+  "Project": {
+    "title": "Project title",
+    "description": "Project description"
   },
   "Errors": {
     "too-short-3": "Minimum length is 3 symbols",

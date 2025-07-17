@@ -1,13 +1,13 @@
 "use client"
 import {AuthContainer} from "@/components/Auth/AuthContainer";
-import {BlurryInput} from "@/components/Global/BlurryInput";
+import {BlurryInput} from "@/components/Global/Inputs/BlurryInput";
 import {useTranslations} from "next-intl";
 import Link from "next/link";
 import {KeyboardEvent, useState} from "react";
-import {BlueButton} from "@/components/Global/BlueButton";
+import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 import {RegistrationSchema} from "@/schemas/auth";
 import {register} from "@/api/auth";
-import {InputError} from "@/components/Global/InputError";
+import {InputError} from "@/components/Global/Inputs/InputError";
 import {signIn} from "@/utils/tempAuth";
 import {useRouter} from "next/navigation";
 import {validator} from "@/utils/validator";
@@ -30,7 +30,13 @@ type RegistrationResponseErrors = {
 export default function RegistrationPage() {
     const t = useTranslations();
 
-    const router = useRouter();
+    const setErrorsWithTimeout = (validationErrors: RegistrationErrors) => {
+        setErrors(validationErrors);
+
+        setTimeout(() => {
+            setErrors(null);
+        }, 5000)
+    }
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -58,8 +64,7 @@ export default function RegistrationPage() {
                     formattedErrors.username = `Errors.${res.username[0]}`;
                 }
 
-                setErrors(formattedErrors);
-                return;
+                setErrorsWithTimeout(formattedErrors);
             }
             setErrors({serverError: "Errors.server-error"});
         }
@@ -80,7 +85,7 @@ export default function RegistrationPage() {
             return;
         }
 
-        setErrors(validationErrors);
+        setErrorsWithTimeout(validationErrors);
     }
 
     const handleEnterPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -137,7 +142,7 @@ export default function RegistrationPage() {
                     <InputError error={errors?.confirmPassword}/>
                     <BlueButton
                         label={t('Auth.sign-up')}
-                        handleClick={() => handleRegistration()}
+                        onClick={() => handleRegistration()}
                     />
                 </div>
             </div>

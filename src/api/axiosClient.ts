@@ -38,6 +38,9 @@ axiosClient.interceptors.response.use(
         if (res.status === 501) {
             alert('Not implemented');
         }
+        if (res.status === 500) {
+            return Promise.reject("Errors.server-error");
+        }
         console.error("Looks like there was a problem. Status Code: " + res.status);
         console.error(error);
         return Promise.reject(error);
