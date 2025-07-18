@@ -7,7 +7,7 @@ import {SmallBlueButton} from "@/components/Global/SmallButtons/SmallBlueButton"
 import {useState} from "react";
 import {ProjectEntry} from "@/components/Dashboard/Project/ProjectEntry";
 import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal";
-import {ProjectErrors} from "@/types/errors";
+import {ProjectOrTaskErrors} from "@/types/errors";
 import {validator} from "@/utils/validator";
 import {ProjectSchema} from "@/schemas/project";
 import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
@@ -18,7 +18,7 @@ export default function DashboardPage() {
 
     const [newProjectTitle, setNewProjectTitle] = useState('');
     const [newProjectDescription, setNewProjectDescription] = useState('');
-    const [errors, setErrors] = useState<ProjectErrors | null>(null)
+    const [errors, setErrors] = useState<ProjectOrTaskErrors | null>(null)
 
     const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
@@ -53,7 +53,7 @@ export default function DashboardPage() {
         const validationErrors = validator(ProjectSchema, body);
 
         if (validationErrors) {
-            setErrors(validationErrors as ProjectErrors);
+            setErrors(validationErrors as ProjectOrTaskErrors);
             return;
         }
 

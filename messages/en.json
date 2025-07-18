@@ -52,6 +52,8 @@
     "server-error": "Server error"
   },
   "Tasks": {
+    "title": "Task title",
+    "description": "Task description",
     "to-do-tasks": "Tasks to be done",
     "in-progress-tasks": "Tasks in progress",
     "in-testing-tasks": "Tasks in testing",

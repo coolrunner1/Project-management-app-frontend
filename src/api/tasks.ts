@@ -6,3 +6,8 @@ export const fetchTasks = async ({queryKey}: any): Promise<Task[]> => {
     const res = await axiosClient.get(`/projects/${projectId}/tasks?updatedAt=desc${status && `&status=${status}`}`);
     return res.data;
 }
+
+export const createTask = async ({body}: any): Promise<Task> => {
+    const res = await axiosClient.post(`/projects/${body.project_id}/tasks`, body);
+    return res.data;
+}

@@ -4,32 +4,22 @@ import {ModalContainer} from "@/components/Global/Modal/ModalContainer";
 import {useTranslations} from "next-intl";
 import {ModalInput} from "@/components/Global/Inputs/ModalInput";
 import {InputError} from "@/components/Global/Inputs/InputError";
-import {ProjectOrTaskErrors} from "@/types/errors";
+import {EditProjectOrTaskModalProps} from "@/components/Dashboard/Project/EditProjectModal";
 
-export type EditProjectOrTaskModalProps = {
-    title: string;
-    description: string;
-    setTitle: (title: string) => void;
-    setDescription: (description: string) => void;
-    onClose: () => void;
-    onSave: () => void;
-    errors?: ProjectOrTaskErrors | null;
-}
-
-export const EditProjectModal = (props: EditProjectOrTaskModalProps) => {
+export const CreateTaskModal = (props: EditProjectOrTaskModalProps) => {
     const t = useTranslations();
 
     return (
         <BlurryModalBackground>
             <ModalContainer>
                 <ModalInput
-                    label={t("Project.title")}
+                    label={t("Tasks.title")}
                     value={props.title}
                     onChange={(e) => props.setTitle(e.target.value)}
                 />
                 <InputError error={props.errors?.title}/>
                 <ModalInput
-                    label={t("Project.description")}
+                    label={t("Tasks.description")}
                     value={props.description}
                     onChange={(e) => props.setDescription(e.target.value)}
                 />

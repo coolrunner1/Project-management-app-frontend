@@ -17,7 +17,7 @@ export type RegistrationResponseErrors = {
     email?: string[],
 };
 
-export type ProjectErrors = {
+export type ProjectOrTaskErrors = {
     title: string;
     description: string;
 }

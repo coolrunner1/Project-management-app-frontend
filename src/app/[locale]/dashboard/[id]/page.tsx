@@ -8,7 +8,7 @@ import {useTranslations} from "next-intl";
 import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 import {RedButton} from "@/components/Global/RegularButtons/RedButton";
 import {TasksContainer} from "@/components/Dashboard/Task/TasksContainer";
-import { fetchTasks } from "@/api/tasks";
+import {createTask} from "@/api/tasks";
 import {GreenButton} from "@/components/Global/RegularButtons/GreenButton";
 import {useEffect, useState} from "react";
 import {YesNoModal} from "@/components/Global/Modal/YesNoModal";
@@ -16,7 +16,10 @@ import {AxiosError} from "axios";
 import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal";
 import {validator} from "@/utils/validator";
 import {ProjectSchema} from "@/schemas/project";
-import {ProjectErrors} from "@/types/errors";
+import {ProjectOrTaskErrors} from "@/types/errors";
+import {NewTaskSchema} from "@/schemas/task";
+import {CreateTaskModal} from "@/components/Dashboard/Task/CreateTaskModal";
+import {useGetGroupedTasks} from "@/hooks/useGetGroupedTasks";
 
 export default function ProjectPage() {
     const t = useTranslations();
@@ -26,7 +29,11 @@ export default function ProjectPage() {
     const [description, setDescription] = useState<string | null>(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [editErrors, setEditErrors] = useState<ProjectErrors | null>(null);
+    const [editErrors, setEditErrors] = useState<ProjectOrTaskErrors | null>(null);
+
+    const [showTaskModal, setShowTaskModal] = useState(false);
+    const [newTaskTitle, setNewTaskTitle] = useState<string>("");
+    const [newTaskDescription, setNewTaskDescription] = useState<string>("");
 
     const params = useParams();
 
@@ -55,38 +62,44 @@ export default function ProjectPage() {
     }, [project]);
 
     const {
-        data: toDoTasks,
-    } = useQuery({
-        queryFn: fetchTasks,
-        queryKey: ["_tasks", params.id, "to_do"]
-    });
+        toDoTasks,
+        refetchToDoTasks,
+        inProgressTasks,
+        inTestingTasks,
+        rejectedTasks,
+        doneTasks
+    } = useGetGroupedTasks({id: Number(params.id)})
 
-    const {
-        data: inProgressTasks,
-    } = useQuery({
-        queryFn: fetchTasks,
-        queryKey: ["_tasks", params.id, "in_progress"],
-    });
+    const handleTaskCreate = () => {
+        const body = {
+            title: newTaskTitle,
+            project_id: params.id,
+            description: newTaskDescription,
+        };
 
-    const {
-        data: inTestingTasks,
-    } = useQuery({
-        queryFn: fetchTasks,
-        queryKey: ["_tasks", params.id, "in_testing"]
-    });
+        const validationErrors = validator(NewTaskSchema, body);
 
-    const {
-        data: rejectedTasks,
-    } = useQuery({
-        queryFn: fetchTasks,
-        queryKey: ["_tasks", params.id, "rejected"],
-    });
+        if (validationErrors) {
+            setEditErrors(validationErrors as ProjectOrTaskErrors);
+            setTimeout(() => {setEditErrors(null)}, 10000)
+            return;
+        }
 
-    const {
-        data:doneTasks,
-    } = useQuery({
-        queryFn: fetchTasks,
-        queryKey: ["_tasks", params.id, "done"]
+        setEditErrors(null);
+
+        createTaskMutate({body})
+    }
+
+    const {mutate: createTaskMutate} = useMutation({
+        mutationFn: createTask,
+        onSuccess: () => {
+            setShowTaskModal(false);
+            refetchToDoTasks();
+        },
+        onError: (error) => {
+            console.error(error);
+            alert(t("Errors.server-error"))
+        }
     });
 
     const handleUpdate = () => {
@@ -98,7 +111,7 @@ export default function ProjectPage() {
         const validationErrors = validator(ProjectSchema, body);
 
         if (validationErrors) {
-            setEditErrors(validationErrors as ProjectErrors);
+            setEditErrors(validationErrors as ProjectOrTaskErrors);
             setTimeout(() => {setEditErrors(null)}, 10000)
             return;
         }
@@ -136,6 +149,17 @@ export default function ProjectPage() {
 
     return (
         <>
+            {showTaskModal &&
+                <CreateTaskModal
+                    title={newTaskTitle}
+                    description={newTaskDescription}
+                    setTitle={setNewTaskTitle}
+                    setDescription={setNewTaskDescription}
+                    onClose={() => setShowTaskModal(false)}
+                    onSave={handleTaskCreate}
+                    errors={editErrors}
+                />
+            }
             {showDeleteModal &&
                 <YesNoModal
                     title={"Project.delete-sure"}
@@ -170,7 +194,7 @@ export default function ProjectPage() {
                             <div className="flex flex-col sm:flex-row gap-2 w-96 mt-4">
                                 <GreenButton
                                     label={t("Project.add-new-task")}
-                                    onClick={() => {refetch()}}
+                                    onClick={() => {setShowTaskModal(true)}}
                                 />
                                 <BlueButton
                                     label={t("edit")}
