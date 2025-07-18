@@ -33,7 +33,7 @@ export default function RegistrationPage() {
 
     const [errors, setErrors] = useState<RegistrationErrors | null>(null);
 
-    const mutation = useMutation({
+    const {mutate} = useMutation({
         mutationFn: register,
         onSuccess: (data) => {
             signIn(data.user, data.token);
@@ -69,7 +69,7 @@ export default function RegistrationPage() {
         const validationErrors = validator(RegistrationSchema, body) || null
 
         if (!validationErrors) {
-            mutation.mutate(body);
+            mutate(body);
             return;
         }
 

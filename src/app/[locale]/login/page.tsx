@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     const [errors, setErrors] = useState<LoginErrors | null>(null);
 
-    const mutation = useMutation({
+    const {mutate} = useMutation({
         mutationFn: login,
         onSuccess: (data) => {
             signIn(data.user, data.token);
@@ -50,7 +50,7 @@ export default function LoginPage() {
         const validationErrors = validator(LoginSchema, body) || null
 
         if (!validationErrors) {
-            mutation.mutate(body);
+            mutate(body);
             return;
         }
 

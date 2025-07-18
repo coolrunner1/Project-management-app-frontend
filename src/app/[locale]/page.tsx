@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link";
 import {useTranslations} from "next-intl";
 
@@ -16,7 +14,7 @@ export default function Home() {
                     {t('description')}
                 </p>
                 <Link
-                    className="p-4 rounded-lg hover:animate-bounce bg-gradient-to-br from-blue-100 via-white to-pink-100"
+                    className="p-4 min-w-28 rounded-lg hover:animate-bounce bg-gradient-to-br from-blue-100 via-white to-pink-100"
                     href="/login"
                 >
                     {t('get-started')}

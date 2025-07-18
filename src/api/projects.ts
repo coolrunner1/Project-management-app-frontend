@@ -17,3 +17,8 @@ export const createProject = async (body: any): Promise<Project> => {
     const res = await axiosClient.post('/projects', body);
     return res.data;
 }
+
+export const deleteProject = async ({mutationKey}: any) => {
+    const [_key, id] = mutationKey;
+    return await axiosClient.delete('/projects/' + id);
+}

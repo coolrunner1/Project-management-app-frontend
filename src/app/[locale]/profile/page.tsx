@@ -1,20 +1,25 @@
 "use client"
 import {useTranslations} from "next-intl";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {FormInput} from "@/components/Global/Inputs/FormInput";
 import {SmallBlueButton} from "@/components/Global/SmallButtons/SmallBlueButton";
 import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
-import {getUser, signOut} from "@/utils/tempAuth";
+import {signOut} from "@/utils/tempAuth";
 import {SmallRedButton} from "@/components/Global/SmallButtons/SmallRedButton";
 import {SmallGreenButton} from "@/components/Global/SmallButtons/SmallGreenButton";
+import {useQuery} from "@tanstack/react-query";
+import {getProfile} from "@/api/profile";
 
 export default function ProfilePage() {
     const t = useTranslations();
 
-    const user = getUser();
+    const {data: user} = useQuery({
+        queryFn: getProfile,
+        queryKey: ["_profile"]
+    });
 
-    const [username, setUsername] = useState(user.username);
-    const [email, setEmail] = useState(user.email);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
 
     const onSubmit = () => {
@@ -24,6 +29,12 @@ export default function ProfilePage() {
     const onDelete = () => {
         alert("Placeholder")
     }
+
+    useEffect(() => {
+        if (!user) return;
+        setUsername(user.username);
+        setEmail(user.email);
+    }, [user])
 
     return (
         <>
@@ -39,10 +50,6 @@ export default function ProfilePage() {
                                     {t('Auth.my-account')}
                                 </h6>
                                 <div className="flex flex-col sm:flex-row gap-2">
-                                    <SmallGreenButton
-                                        label={t('Auth.sign-out')}
-                                        onClick={signOut}
-                                    />
                                     <SmallBlueButton
                                         label={t('save')}
                                         onClick={onSubmit}
@@ -50,6 +57,10 @@ export default function ProfilePage() {
                                     <SmallRedButton
                                         label={t('delete')}
                                         onClick={onDelete}
+                                    />
+                                    <SmallGreenButton
+                                        label={t('Auth.sign-out')}
+                                        onClick={signOut}
                                     />
                                 </div>
                             </div>

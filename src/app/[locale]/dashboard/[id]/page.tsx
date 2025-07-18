@@ -1,21 +1,24 @@
 "use client"
-import {signOut} from "@/utils/tempAuth";
 import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
-import {useQuery} from "@tanstack/react-query";
-import {getProject} from "@/api/projects";
-import {useParams} from "next/navigation";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {deleteProject, getProject} from "@/api/projects";
+import {useParams, useRouter} from "next/navigation";
 import {LoadingIndicator} from "@/components/Global/LoadingIndicator";
-import {SmallBlueButton} from "@/components/Global/SmallButtons/SmallBlueButton";
-import {ProjectEntry} from "@/components/Dashboard/Project/ProjectEntry";
 import {useTranslations} from "next-intl";
 import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 import {RedButton} from "@/components/Global/RegularButtons/RedButton";
 import {TasksContainer} from "@/components/Dashboard/Task/TasksContainer";
 import { fetchTasks } from "@/api/tasks";
 import {GreenButton} from "@/components/Global/RegularButtons/GreenButton";
+import {useEffect, useState} from "react";
+import {YesNoModal} from "@/components/Global/Modal/YesNoModal";
+import {AxiosError} from "axios";
 
 export default function ProjectPage() {
     const t = useTranslations();
+    const router = useRouter();
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const params = useParams();
 
@@ -28,6 +31,13 @@ export default function ProjectPage() {
         queryFn: getProject,
         queryKey: ["_projects", params.id]
     });
+
+    useEffect(() => {
+        if (!error) return;
+        if ((error as AxiosError).status === 404) {
+            router.replace("/dashboard");
+        }
+    }, [error]);
 
     const {
         data: toDoTasks,
@@ -64,8 +74,29 @@ export default function ProjectPage() {
         queryKey: ["_tasks", params.id, "done"]
     });
 
+    const handleDelete = () => {
+        deleteMutate({ mutationKey: ["_project", params.id] })
+    }
+
+    const {mutate: deleteMutate} = useMutation({
+        mutationFn: deleteProject,
+        onSuccess: () => {
+            router.push("/dashboard");
+        },
+        onError: () => {
+            alert(t("Errors.failed-delete"));
+        }
+    });
+
     return (
         <>
+            {showDeleteModal &&
+                <YesNoModal
+                    title={"Project.delete-sure"}
+                    onYesClick={handleDelete}
+                    onNoClick={() => setShowDeleteModal(false)}
+                />
+            }
             <NavBar />
             <div className="min-h-[90vh]">
                 {isLoading && <LoadingIndicator/>}
@@ -90,7 +121,7 @@ export default function ProjectPage() {
                                 />
                                 <RedButton
                                     label={t("delete")}
-                                    onClick={() => {refetch()}}
+                                    onClick={() => setShowDeleteModal(true)}
                                 />
                             </div>
                         </div>

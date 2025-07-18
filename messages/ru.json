@@ -10,6 +10,8 @@
   "delete": "Удалить",
   "profile": "Профиль",
   "change-language": "Сменить язык",
+  "yes": "Да",
+  "no": "Нет",
   "Landing": {
     "manage-projects": "Управляйте Проектами",
     "beautifully": "Со Стилем",
@@ -34,6 +36,7 @@
   "Project": {
     "projects": "Проекты",
     "add-new-task": "Добавить задачу",
+    "delete-sure": "Вы уверены, что хотите удалить данный проект?",
     "no-projects": "Проекты отсутствуют",
     "title": "Название проекта",
     "description": "Описание проекта"
@@ -44,6 +47,7 @@
     "invalid-login-password": "Неверный логин или пароль",
     "invalid-email": "Указан неверный email",
     "passwords-no-match": "Пароли не совпадают",
+    "failed-delete": "Не удалось удалить",
     "has already been taken": "Уже существует такой пользователь"
   },
   "Tasks": {

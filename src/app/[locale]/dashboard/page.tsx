@@ -33,7 +33,7 @@ export default function DashboardPage() {
         queryKey: ['_projects']
     });
 
-    const mutation = useMutation({
+    const {mutate} = useMutation({
         mutationFn: createProject,
         onSuccess: () => {
             setShowNewProjectModal(false);
@@ -57,7 +57,7 @@ export default function DashboardPage() {
             return;
         }
 
-        mutation.mutate(body);
+        mutate(body);
     }
 
     return (
@@ -100,7 +100,7 @@ export default function DashboardPage() {
                                 </>
                             }
                             {!data?.length &&
-                                <div className="text-center text-xl">{t('Project.ёno-projects')}</div>
+                                <div className="text-center text-xl">{t('Project.no-projects')}</div>
                             }
                         </>
                     }
