@@ -37,6 +37,8 @@ export default function DashboardPage() {
         mutationFn: createProject,
         onSuccess: () => {
             setShowNewProjectModal(false);
+            setNewProjectTitle("");
+            setNewProjectDescription("");
             refetch();
         },
         onError: () => {

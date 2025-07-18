@@ -94,6 +94,8 @@ export default function ProjectPage() {
         mutationFn: createTask,
         onSuccess: () => {
             setShowTaskModal(false);
+            setNewTaskTitle("");
+            setNewTaskDescription("");
             refetchToDoTasks();
         },
         onError: (error) => {

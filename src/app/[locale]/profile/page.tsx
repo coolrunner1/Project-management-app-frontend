@@ -168,6 +168,7 @@ export default function ProfilePage() {
                                     <InputError error={errors?.email}/>
                                     <FormInput
                                         name={t('Auth.new-password')}
+                                        type={"password"}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />

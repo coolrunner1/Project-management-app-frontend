@@ -3,6 +3,7 @@ import {ChangeEvent} from "react";
 export type FormInputProps = {
     name: string,
     value: string,
+    type?: string,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
     placeholder?: string,
 }
@@ -18,7 +19,7 @@ export const FormInput = (props: FormInputProps) => {
                     {props.name}
                 </label>
                 <input
-                    type="text"
+                    type={props.type}
                     className="bg-container border-0 px-3 py-3 rounded text-sm shadow-lg focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     value={props.value}
                     onChange={props.onChange}
