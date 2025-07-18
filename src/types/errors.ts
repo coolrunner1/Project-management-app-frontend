@@ -12,6 +12,13 @@ export type RegistrationErrors = {
     serverError?: string
 };
 
+export type ProfileUpdateErrors = {
+    username?: string,
+    email?: string,
+    password?: string,
+    serverError?: string
+};
+
 export type RegistrationResponseErrors = {
     username?: string[],
     email?: string[],

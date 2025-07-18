@@ -47,13 +47,14 @@ export default function DashboardPage() {
     const handleSave = async () => {
         const body = {
             title: newProjectTitle,
-            description: newProjectDescription,
+            description: newProjectDescription || undefined,
         };
 
         const validationErrors = validator(ProjectSchema, body);
 
         if (validationErrors) {
             setErrors(validationErrors as ProjectOrTaskErrors);
+            setTimeout(() => setErrors(null), 10000);
             return;
         }
 

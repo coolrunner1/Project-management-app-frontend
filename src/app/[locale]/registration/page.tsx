@@ -53,6 +53,7 @@ export default function RegistrationPage() {
                 }
 
                 setErrorsWithTimeout(formattedErrors);
+                return;
             }
             setErrors({serverError: "Errors.server-error"});
         }

@@ -12,7 +12,7 @@ import {InputError} from "@/components/Global/Inputs/InputError";
 import {useMutation} from "@tanstack/react-query";
 import {signIn} from "@/utils/tempAuth";
 import {AxiosError} from "axios";
-import {ErrorModal} from "@/components/Global/Modal/ErrorModal";
+import {OkModal} from "@/components/Global/Modal/OkModal";
 import {LoginErrors} from "@/types/errors";
 
 export default function LoginPage() {
@@ -69,8 +69,8 @@ export default function LoginPage() {
     return (
         <>
             {errors?.serverError &&
-                <ErrorModal
-                    error={errors.serverError}
+                <OkModal
+                    message={errors.serverError}
                     setClose={() => setErrors(null)}
                 />
             }

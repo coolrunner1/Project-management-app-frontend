@@ -6,8 +6,8 @@ export const getProfile = async () => {
     return res.data;
 }
 
-export const updateProfile = async (data: any): Promise<User> => {
-    const res = await axiosClient.put('/profile', data);
+export const updateProfile = async (body: any): Promise<User> => {
+    const res = await axiosClient.put('/profile', body);
     return res.data;
 }
 

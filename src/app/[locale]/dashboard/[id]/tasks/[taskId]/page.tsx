@@ -104,7 +104,7 @@ export default function TasksPage() {
         <>
             {showDeleteModal &&
                 <YesNoModal
-                    title={"Project.delete-sure"}
+                    title={"Tasks.delete-sure"}
                     onYesClick={handleDelete}
                     onNoClick={() => setShowDeleteModal(false)}
                 />

@@ -3,18 +3,18 @@ import {BlueButton} from "@/components/Global/RegularButtons/BlueButton";
 import {BlurryModalBackground} from "@/components/Global/Modal/BlurryModalBackground";
 import {ModalContainer} from "@/components/Global/Modal/ModalContainer";
 
-export type ErrorModalProps = {
-    error: string;
+export type OkModalProps = {
+    message: string;
     setClose: () => void;
 }
 
-export const ErrorModal = (props: ErrorModalProps) => {
+export const OkModal = (props: OkModalProps) => {
     const t = useTranslations();
 
     return (
         <BlurryModalBackground>
             <ModalContainer>
-                <span className="text-xl font-bold mb-4">{t(props.error)}</span>
+                <span className="text-xl font-bold mb-4">{t(props.message)}</span>
                 <BlueButton
                     label={"OK"}
                     onClick={props.setClose}
