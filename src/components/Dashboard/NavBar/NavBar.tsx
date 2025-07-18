@@ -10,7 +10,7 @@ export const NavBar = () => {
             <header className="flex justify-evenly fixed bg-container px-5 pt-2 w-screen max-w-full">
                 <Link href="/dashboard">
                     <NavBarButton>
-                        {t("home")}
+                        {t("Project.projects")}
                     </NavBarButton>
                 </Link>
                 <Link href="/profile">
