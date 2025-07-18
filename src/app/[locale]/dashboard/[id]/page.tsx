@@ -74,7 +74,7 @@ export default function ProjectPage() {
         const body = {
             title: newTaskTitle,
             project_id: params.id,
-            description: newTaskDescription,
+            description: newTaskDescription || undefined,
         };
 
         const validationErrors = validator(TaskSchema, body);
@@ -105,7 +105,7 @@ export default function ProjectPage() {
     const handleUpdate = () => {
         const body = {
             title,
-            description,
+            description: description || undefined,
         };
 
         const validationErrors = validator(ProjectSchema, body);

@@ -58,7 +58,7 @@ export default function TasksPage() {
             title,
             project_id: task?.project_id,
             status,
-            description
+            description: description || undefined
         };
 
         const validationErrors = validator(TaskSchema, body);
