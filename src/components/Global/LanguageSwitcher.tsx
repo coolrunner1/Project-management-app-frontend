@@ -1,12 +1,15 @@
 import {Link} from "@/i18n/navigation";
 import {useState} from "react";
 import {useTranslations} from "next-intl";
+import {usePathname} from "next/navigation";
 
 export type LanguageSwitcherProps = {
     className?: string;
 }
 
 export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
+    const pathname = usePathname();
+
     const [isOpen, setIsOpen] = useState(false);
 
     const t = useTranslations()
@@ -29,14 +32,14 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
                 >
                     <Link
                         className="hover:bg-gray-800 w-full"
-                        href="/dashboard"
+                        href={pathname.slice(3)}
                         locale="ru"
                     >
                         Русский
                     </Link>
                     <Link
                         className="hover:bg-gray-800 w-full"
-                        href="/dashboard"
+                        href={pathname.slice(3)}
                         locale="en"
                     >
                         English

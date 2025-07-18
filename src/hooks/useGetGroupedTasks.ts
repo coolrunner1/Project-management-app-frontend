@@ -1,8 +1,5 @@
-import {validator} from "@/utils/validator";
-import {NewTaskSchema} from "@/schemas/task";
-import {ProjectOrTaskErrors} from "@/types/errors";
 import {useQuery} from "@tanstack/react-query";
-import {createTask, fetchTasks} from "@/api/tasks";
+import {fetchTasks} from "@/api/tasks";
 
 export const useGetGroupedTasks = ({id}: {id: string | number}) => {
     const {

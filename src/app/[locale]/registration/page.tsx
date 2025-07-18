@@ -36,7 +36,7 @@ export default function RegistrationPage() {
     const {mutate} = useMutation({
         mutationFn: register,
         onSuccess: (data) => {
-            signIn(data.user, data.token);
+            signIn(data.token);
         },
         onError: (error: AxiosError) => {
             console.error('Login error:', error);

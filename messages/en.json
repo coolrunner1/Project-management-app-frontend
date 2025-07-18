@@ -54,6 +54,12 @@
   "Tasks": {
     "title": "Task title",
     "description": "Task description",
+    "status": "Tasks status",
+    "to_do": "To Do",
+    "in_progress": "In Progress",
+    "in_testing": "In Testing",
+    "rejected": "Rejected",
+    "done": "Done",
     "to-do-tasks": "Tasks to be done",
     "in-progress-tasks": "Tasks in progress",
     "in-testing-tasks": "Tasks in testing",

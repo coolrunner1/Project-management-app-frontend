@@ -17,23 +17,23 @@ import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal"
 import {validator} from "@/utils/validator";
 import {ProjectSchema} from "@/schemas/project";
 import {ProjectOrTaskErrors} from "@/types/errors";
-import {NewTaskSchema} from "@/schemas/task";
-import {CreateTaskModal} from "@/components/Dashboard/Task/CreateTaskModal";
+import {TaskSchema} from "@/schemas/task";
+import {EditTaskModal} from "@/components/Dashboard/Task/EditTaskModal";
 import {useGetGroupedTasks} from "@/hooks/useGetGroupedTasks";
 
 export default function ProjectPage() {
     const t = useTranslations();
     const router = useRouter();
 
-    const [title, setTitle] = useState<string>("");
+    const [title, setTitle] = useState("");
     const [description, setDescription] = useState<string | null>(null);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [editErrors, setEditErrors] = useState<ProjectOrTaskErrors | null>(null);
 
     const [showTaskModal, setShowTaskModal] = useState(false);
-    const [newTaskTitle, setNewTaskTitle] = useState<string>("");
-    const [newTaskDescription, setNewTaskDescription] = useState<string>("");
+    const [newTaskTitle, setNewTaskTitle] = useState("");
+    const [newTaskDescription, setNewTaskDescription] = useState("");
 
     const params = useParams();
 
@@ -77,7 +77,7 @@ export default function ProjectPage() {
             description: newTaskDescription,
         };
 
-        const validationErrors = validator(NewTaskSchema, body);
+        const validationErrors = validator(TaskSchema, body);
 
         if (validationErrors) {
             setEditErrors(validationErrors as ProjectOrTaskErrors);
@@ -150,7 +150,7 @@ export default function ProjectPage() {
     return (
         <>
             {showTaskModal &&
-                <CreateTaskModal
+                <EditTaskModal
                     title={newTaskTitle}
                     description={newTaskDescription}
                     setTitle={setNewTaskTitle}

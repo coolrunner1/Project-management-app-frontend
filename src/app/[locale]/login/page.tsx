@@ -26,7 +26,7 @@ export default function LoginPage() {
     const {mutate} = useMutation({
         mutationFn: login,
         onSuccess: (data) => {
-            signIn(data.user, data.token);
+            signIn(data.token);
         },
         onError: (error: AxiosError) => {
             console.error('Login error:', error);
