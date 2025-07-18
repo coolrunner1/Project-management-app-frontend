@@ -31,14 +31,14 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
                     aria-orientation="vertical"
                 >
                     <Link
-                        className="hover:bg-gray-800 w-full"
+                        className="hover:bg-yellow-100 dark:hover:bg-gray-800  w-full"
                         href={pathname.slice(3)}
                         locale="ru"
                     >
                         Русский
                     </Link>
                     <Link
-                        className="hover:bg-gray-800 w-full"
+                        className="hover:bg-yellow-100 dark:hover:bg-gray-800 w-full"
                         href={pathname.slice(3)}
                         locale="en"
                     >
