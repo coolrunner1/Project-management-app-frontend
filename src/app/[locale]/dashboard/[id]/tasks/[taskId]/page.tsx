@@ -136,7 +136,7 @@ export default function TasksPage() {
                             <span className="text-lg sm:text-xl">{t(`Tasks.${task.status}`)}</span>
                             <span className="text-sm">{t("created_at")}: {new Date(task.created_at).toLocaleString()}</span>
                             <span className="text-sm">{t("updated_at")}: {new Date(task.updated_at).toLocaleString()}</span>
-                            <div className="flex flex-col sm:flex-row gap-2 w-96 mt-4">
+                            <div className="flex flex-col sm:flex-row gap-2 max-w-52 sm:w-96 sm:max-w-full mt-4">
                                 <BlueButton
                                     label={t("edit")}
                                     onClick={() => {setShowEditModal(true)}}
