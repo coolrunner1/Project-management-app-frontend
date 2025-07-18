@@ -1,7 +1,7 @@
 "use client"
 import {NavBar} from "@/components/Dashboard/NavBar/NavBar";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {deleteProject, getProject} from "@/api/projects";
+import {deleteProject, getProject, updateProject} from "@/api/projects";
 import {useParams, useRouter} from "next/navigation";
 import {LoadingIndicator} from "@/components/Global/LoadingIndicator";
 import {useTranslations} from "next-intl";
@@ -13,12 +13,20 @@ import {GreenButton} from "@/components/Global/RegularButtons/GreenButton";
 import {useEffect, useState} from "react";
 import {YesNoModal} from "@/components/Global/Modal/YesNoModal";
 import {AxiosError} from "axios";
+import {EditProjectModal} from "@/components/Dashboard/Project/EditProjectModal";
+import {validator} from "@/utils/validator";
+import {ProjectSchema} from "@/schemas/project";
+import {ProjectErrors} from "@/types/errors";
 
 export default function ProjectPage() {
     const t = useTranslations();
     const router = useRouter();
 
+    const [title, setTitle] = useState<string>("");
+    const [description, setDescription] = useState<string | null>(null);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [editErrors, setEditErrors] = useState<ProjectErrors | null>(null);
 
     const params = useParams();
 
@@ -38,6 +46,13 @@ export default function ProjectPage() {
             router.replace("/dashboard");
         }
     }, [error]);
+
+    useEffect(() => {
+        if (!project) return;
+
+        setTitle(project.title);
+        setDescription(project.description);
+    }, [project]);
 
     const {
         data: toDoTasks,
@@ -74,6 +89,37 @@ export default function ProjectPage() {
         queryKey: ["_tasks", params.id, "done"]
     });
 
+    const handleUpdate = () => {
+        const body = {
+            title,
+            description,
+        };
+
+        const validationErrors = validator(ProjectSchema, body);
+
+        if (validationErrors) {
+            setEditErrors(validationErrors as ProjectErrors);
+            setTimeout(() => {setEditErrors(null)}, 10000)
+            return;
+        }
+
+        setEditErrors(null);
+
+        updateMutate({ mutationKey: ["_project", params.id, body], })
+    }
+
+    const {mutate: updateMutate} = useMutation({
+        mutationFn: updateProject,
+        onSuccess: () => {
+            setShowEditModal(false);
+            refetch();
+        },
+        onError: (error) => {
+            console.error(error);
+            alert(t("Errors.server-error"))
+        }
+    });
+
     const handleDelete = () => {
         deleteMutate({ mutationKey: ["_project", params.id] })
     }
@@ -97,6 +143,17 @@ export default function ProjectPage() {
                     onNoClick={() => setShowDeleteModal(false)}
                 />
             }
+            {showEditModal &&
+                <EditProjectModal
+                    title={title}
+                    description={description || ""}
+                    setTitle={setTitle}
+                    setDescription={setDescription}
+                    onClose={() => setShowEditModal(false)}
+                    onSave={handleUpdate}
+                    errors={editErrors}
+                />
+            }
             <NavBar />
             <div className="min-h-[90vh]">
                 {isLoading && <LoadingIndicator/>}
@@ -117,7 +174,7 @@ export default function ProjectPage() {
                                 />
                                 <BlueButton
                                     label={t("edit")}
-                                    onClick={() => {refetch()}}
+                                    onClick={() => {setShowEditModal(true)}}
                                 />
                                 <RedButton
                                     label={t("delete")}

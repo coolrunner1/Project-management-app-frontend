@@ -48,7 +48,8 @@
     "invalid-email": "Invalid email provided",
     "passwords-no-match": "Passwords don't match",
     "failed-delete": "Failed to delete",
-    "has already been taken": "Has already been taken"
+    "has already been taken": "Has already been taken",
+    "server-error": "Server error"
   },
   "Tasks": {
     "to-do-tasks": "Tasks to be done",

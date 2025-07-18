@@ -6,7 +6,7 @@ import {ModalInput} from "@/components/Global/Inputs/ModalInput";
 import {InputError} from "@/components/Global/Inputs/InputError";
 import {ProjectErrors} from "@/types/errors";
 
-export type NewProjectModalProps = {
+export type EditProjectModalProps = {
     title: string;
     description: string;
     setTitle: (title: string) => void;
@@ -16,7 +16,7 @@ export type NewProjectModalProps = {
     errors?: ProjectErrors | null;
 }
 
-export const EditProjectModal = (props: NewProjectModalProps) => {
+export const EditProjectModal = (props: EditProjectModalProps) => {
     const t = useTranslations();
 
     return (
