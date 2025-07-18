@@ -193,7 +193,7 @@ export default function ProjectPage() {
                             <span className="text-lg sm:text-xl">{project.description}</span>
                             <span className="text-sm">{t("created_at")}: {new Date(project.created_at).toLocaleString()}</span>
                             <span className="text-sm">{t("updated_at")}: {new Date(project.updated_at).toLocaleString()}</span>
-                            <div className="flex flex-col sm:flex-row gap-2 max-w-52 sm:w-96 sm:max-w-full mt-4">
+                            <div className="flex flex-col sm:flex-row gap-2 min-w-52 sm:w-96 sm:max-w-full mt-4">
                                 <GreenButton
                                     label={t("Project.add-new-task")}
                                     onClick={() => {setShowTaskModal(true)}}
