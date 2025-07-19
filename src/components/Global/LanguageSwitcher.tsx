@@ -7,12 +7,24 @@ export type LanguageSwitcherProps = {
     className?: string;
 }
 
+const languages = [
+    {
+        locale: 'en',
+        label: 'English',
+    },
+    {
+        locale: 'ru',
+        label: 'Русский',
+    }
+]
+
 export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
+    const t = useTranslations();
+
     const pathname = usePathname();
+    const href = pathname.slice(3)
 
     const [isOpen, setIsOpen] = useState(false);
-
-    const t = useTranslations()
 
     return (
         <div className="block relative">
@@ -30,20 +42,18 @@ export const LanguageSwitcher = (props: LanguageSwitcherProps) => {
                     role="menu"
                     aria-orientation="vertical"
                 >
-                    <Link
-                        className="hover:bg-yellow-100 dark:hover:bg-gray-800  w-full"
-                        href={pathname.slice(3)}
-                        locale="ru"
-                    >
-                        Русский
-                    </Link>
-                    <Link
-                        className="hover:bg-yellow-100 dark:hover:bg-gray-800 w-full"
-                        href={pathname.slice(3)}
-                        locale="en"
-                    >
-                        English
-                    </Link>
+                    {
+                        languages.map((language) =>
+                            <Link
+                                key={language.locale}
+                                className="hover:bg-yellow-100 dark:hover:bg-gray-800  w-full"
+                                href={href}
+                                locale={language.locale}
+                            >
+                                {language.label}
+                            </Link>
+                        )
+                    }
                 </div>
             )}
         </div>

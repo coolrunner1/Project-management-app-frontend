@@ -20,6 +20,7 @@ import {ProjectOrTaskErrors} from "@/types/errors";
 import {TaskSchema} from "@/schemas/task";
 import {EditTaskModal} from "@/components/Dashboard/Task/EditTaskModal";
 import {useGetGroupedTasks} from "@/hooks/useGetGroupedTasks";
+import {GeneralInfoContainer} from "@/components/Global/Containers/GeneralInfoContainer";
 
 export default function ProjectPage() {
     const t = useTranslations();
@@ -188,7 +189,7 @@ export default function ProjectPage() {
                 )}
                 {project &&
                     <>
-                        <div className='flex flex-col justify-center items-center bg-container max-w-7xl mx-auto rounded-2xl shadow-lg p-4'>
+                        <GeneralInfoContainer>
                             <span className="text-xl sm:text-2xl">{project.title}</span>
                             <span className="text-lg sm:text-xl">{project.description}</span>
                             <span className="text-sm">{t("created_at")}: {new Date(project.created_at).toLocaleString()}</span>
@@ -207,7 +208,7 @@ export default function ProjectPage() {
                                     onClick={() => setShowDeleteModal(true)}
                                 />
                             </div>
-                        </div>
+                        </GeneralInfoContainer>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-7xl m-auto p-5">
                             {toDoTasks && toDoTasks.length > 0 &&

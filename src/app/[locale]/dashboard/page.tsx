@@ -79,7 +79,7 @@ export default function DashboardPage() {
             <NavBar/>
             <div className="min-h-[90vh]">
                 <div className='text-center'>
-                    <h6 className='text-blueGray-700 text-xl md:text-2xl font-bold'>{t('Project.projects')}</h6>
+                    <h6 className='text-xl md:text-2xl font-bold'>{t('Project.projects')}</h6>
                 </div>
                 <div className='flex flex-col items-center justify-center px-4 py-4 overflow-auto'>
                     {isLoading && <LoadingIndicator/>}

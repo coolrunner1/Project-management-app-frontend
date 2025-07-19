@@ -14,6 +14,7 @@ import {validator} from "@/utils/validator";
 import {ProjectOrTaskErrors} from "@/types/errors";
 import {TaskSchema} from "@/schemas/task";
 import {EditTaskModal} from "@/components/Dashboard/Task/EditTaskModal";
+import {GeneralInfoContainer} from "@/components/Global/Containers/GeneralInfoContainer";
 
 export default function TasksPage() {
     const t = useTranslations();
@@ -130,7 +131,7 @@ export default function TasksPage() {
                 )}
                 {task &&
                     <>
-                        <div className='flex flex-col justify-center items-center bg-container max-w-7xl mx-auto rounded-2xl shadow-lg p-4'>
+                        <GeneralInfoContainer>
                             <span className="text-xl sm:text-2xl">{task.title}</span>
                             <span className="text-lg sm:text-xl">{task.description}</span>
                             <span className="text-lg sm:text-xl">{t(`Tasks.${task.status}`)}</span>
@@ -146,7 +147,7 @@ export default function TasksPage() {
                                     onClick={() => setShowDeleteModal(true)}
                                 />
                             </div>
-                        </div>
+                        </GeneralInfoContainer>
                     </>
                 }
             </div>
