@@ -1,4 +1,4 @@
-import {QueryClient} from "@tanstack/query-core";
+import {MutationKey, QueryClient, QueryKey} from "@tanstack/query-core";
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -7,3 +7,11 @@ export const queryClient = new QueryClient({
         }
     }
 });
+
+export type QueryKeyObject = {
+    queryKey: QueryKey;
+}
+
+export type MutationKeyObject = {
+    mutationKey: MutationKey;
+}
