@@ -15,6 +15,7 @@ import {ProjectOrTaskErrors} from "@/types/errors";
 import {TaskSchema} from "@/schemas/task";
 import {EditTaskModal} from "@/components/Dashboard/Task/EditTaskModal";
 import {GeneralInfoContainer} from "@/components/Global/Containers/GeneralInfoContainer";
+import formatDateTime from "@/utils/formatDateTime";
 
 export default function TasksPage() {
     const t = useTranslations();
@@ -135,8 +136,8 @@ export default function TasksPage() {
                             <span className="text-xl sm:text-2xl">{task.title}</span>
                             <span className="text-lg sm:text-xl">{task.description}</span>
                             <span className="text-lg sm:text-xl">{t(`Tasks.${task.status}`)}</span>
-                            <span className="text-sm">{t("created_at")}: {new Date(task.created_at).toLocaleString()}</span>
-                            <span className="text-sm">{t("updated_at")}: {new Date(task.updated_at).toLocaleString()}</span>
+                            <span className="text-sm">{t("created_at")}: {formatDateTime(task.created_at)}</span>
+                            <span className="text-sm">{t("updated_at")}: {formatDateTime(task.updated_at)}</span>
                             <div className="flex flex-col sm:flex-row gap-2 min-w-52 sm:w-96 sm:max-w-full mt-4">
                                 <BlueButton
                                     label={t("edit")}

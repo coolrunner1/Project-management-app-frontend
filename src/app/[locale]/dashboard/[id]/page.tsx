@@ -21,6 +21,7 @@ import {TaskSchema} from "@/schemas/task";
 import {EditTaskModal} from "@/components/Dashboard/Task/EditTaskModal";
 import {useGetGroupedTasks} from "@/hooks/useGetGroupedTasks";
 import {GeneralInfoContainer} from "@/components/Global/Containers/GeneralInfoContainer";
+import formatDateTime from "@/utils/formatDateTime";
 
 export default function ProjectPage() {
     const t = useTranslations();
@@ -192,8 +193,8 @@ export default function ProjectPage() {
                         <GeneralInfoContainer>
                             <span className="text-xl sm:text-2xl">{project.title}</span>
                             <span className="text-lg sm:text-xl">{project.description}</span>
-                            <span className="text-sm">{t("created_at")}: {new Date(project.created_at).toLocaleString()}</span>
-                            <span className="text-sm">{t("updated_at")}: {new Date(project.updated_at).toLocaleString()}</span>
+                            <span className="text-sm">{t("created_at")}: {formatDateTime(project.created_at)}</span>
+                            <span className="text-sm">{t("updated_at")}: {formatDateTime(project.updated_at)}</span>
                             <div className="flex flex-col sm:flex-row gap-2 min-w-52 sm:w-96 sm:max-w-full mt-4">
                                 <GreenButton
                                     label={t("Project.add-new-task")}
